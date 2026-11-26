@@ -1,2 +1,88 @@
-<iframe width="560" height="315" src="https://www.youtube.com/embed/psIZiXQvGfo?si=yDBgU1gAzfVmfZ76" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/BCulM89gpB8?si=Hus5G07vl6ypXaio" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+<meta name="theme-color" content="#f5f5f7">
+<meta name="description" content="Watch videos on NWSTV.">
+<title>NWSTV — Watch</title>
+<style>
+  /* Broad compatibility: no frameworks, CSS variables, grid, or aspect-ratio required. */
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: #f5f5f7; color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.45;
+  }
+  .page { width: 100%; max-width: 980px; margin: 0 auto; padding: 22px 16px 40px; }
+  .topbar { text-align: center; padding: 8px 0 26px; }
+  .brand {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 2.4px;
+    color: #6e6e73; text-transform: uppercase; margin-bottom: 8px;
+  }
+  h1 { margin: 0; font-size: 34px; font-weight: 700; letter-spacing: -1.2px; line-height: 1.15; }
+  .intro { margin: 10px auto 0; max-width: 520px; font-size: 15px; color: #6e6e73; }
+  .videos { width: 100%; }
+  .video-card {
+    display: block; width: 100%; margin: 0 0 18px; background: #fff;
+    border: 1px solid #e6e6e9; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,.045);
+  }
+  .video-frame { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; background: #111; }
+  .video-frame iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    display: block; background: #111;
+  }
+  .card-info { padding: 15px 17px 17px; }
+  .card-title { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: -.25px; }
+  .card-subtitle { margin: 5px 0 0; color: #86868b; font-size: 13px; }
+  .footer { text-align: center; padding: 18px 0 0; color: #8a8a8f; font-size: 12px; }
+  @media (min-width: 700px) {
+    .page { padding: 34px 24px 48px; }
+    .topbar { padding: 10px 0 32px; }
+    h1 { font-size: 42px; }
+    .videos { font-size: 0; }
+    .video-card { display: inline-block; vertical-align: top; width: 48.7%; margin-right: 2.6%; margin-bottom: 22px; }
+    .video-card:nth-child(2n) { margin-right: 0; }
+    .card-info { padding: 16px 18px 19px; }
+  }
+  @media (max-width: 360px) {
+    .page { padding: 18px 12px 30px; }
+    h1 { font-size: 29px; }
+    .card-info { padding: 13px 14px 15px; }
+    .card-title { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="brand">NWSTV</div>
+      <h1>Watch &amp; Enjoy</h1>
+      <p class="intro">A simple, comfortable viewing experience—made for your phone, tablet, and web view.</p>
+    </header>
+    <section class="videos" aria-label="Video library">
+      <article class="video-card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/psIZiXQvGfo?si=yDBgU1gAzfVmfZ76" title="NWSTV video one" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">Featured Video</h2>
+          <p class="card-subtitle">NWSTV · Video 01</p>
+        </div>
+      </article>
+      <article class="video-card">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/BCulM89gpB8?si=Hus5G07vl6ypXaio" title="NWSTV video two" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">More to Watch</h2>
+          <p class="card-subtitle">NWSTV · Video 02</p>
+        </div>
+      </article>
+    </section>
+    <footer class="footer">NWSTV · Video content hosted by YouTube</footer>
+  </main>
+</body>
+</html>
