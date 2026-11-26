@@ -1,0 +1,237 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarnal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #ff3366;
+  --bg: #ffffff;
+  --text: #111;
+  --card-bg: #fdfdfd;
+  --card-radius: 24px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  --transition: all 0.3s ease;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Loader */
+#loader {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+.spinner {
+  width:60px; height:60px;
+  border:6px solid #f3f3f3;
+  border-top:6px solid var(--primary);
+  border-radius:50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+
+header {
+  padding: 1.2rem 1rem;
+  text-align:center;
+  font-size:1.6rem;
+  font-weight:700;
+  color:#fff;
+  background: linear-gradient(135deg, #ff3366, #ff80ab);
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top:0;
+  z-index:10;
+}
+
+main {
+  flex:1;
+  padding:2rem 1rem;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap:1.5rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.card {
+  background: var(--card-bg);
+  padding:2rem 1.2rem;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  transition: var(--transition);
+  cursor:pointer;
+  aspect-ratio:1/1;
+  position:relative;
+  overflow:hidden;
+}
+
+.card::after {
+  content:'';
+  position:absolute;
+  width:120%; height:120%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent);
+  transform: rotate(25deg);
+  top:-60%; left:-60%;
+  transition: var(--transition);
+  pointer-events:none;
+}
+.card:hover::after { top:0; left:0; }
+
+.card span { font-size:2.8rem; margin-bottom:1rem; transition: var(--transition); }
+.card p { font-size:1.1rem; font-weight:600; color:#333; letter-spacing:0.5px; transition: var(--transition); }
+
+.card:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+  background: #fff0f6;
+}
+.card:hover span { transform: scale(1.2) rotate(5deg); }
+
+/* Ripple effect */
+.ripple {
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  animation:ripple 0.6s linear;
+  background-color: rgba(255,51,102,0.3);
+  pointer-events:none;
+}
+@keyframes ripple { to{ transform:scale(4); opacity:0;} }
+
+@media(max-width:768px){
+  main { gap:1rem; padding:1.5rem 1rem; }
+  .card { padding:1.5rem 1rem; }
+  .card span { font-size:2.2rem; }
+  .card p { font-size:1rem; }
+  header { font-size:1.3rem; padding:1rem; }
+}
+@keyframes fadeIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+/* Random GIF */
+#gif-box {
+  grid-column:1 / -1;
+  text-align:center;
+  margin-top:2rem;
+}
+#gif-box img {
+  max-width:100%;
+  border-radius:24px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+}
+</style>
+
+
+
+<div id="loader"><div class="spinner"></div></div>
+
+<header>Love with Spark ❤️✨</header>
+
+<main>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/shayari')"><span>💌</span><p>Shayari</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/babyname')"><span>👶</span><p>Baby Name</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/lovequotes')"><span>💬</span><p>Love Quotes</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/morsecode')"><span>📡</span><p>Morse Code</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/lovedairy')"><span>📖</span><p>Love Diary</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/funcollector')"><span>🎮</span><p>Fun</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/shorts')"><span>🎬</span><p>Shorts</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/fancyfont')"><span>✨</span><p>Fancy Fonts</p></div>
+  <div class="card" onclick="goTo('https://zarnal.github.io/ZARNAL/echobae.html')"><span>📣</span><p>EchoBae</p></div>
+  <div class="card" onclick="goTo('https://zarnal.github.io/ZARNAL/magicmirrorhome.html')"><span>🪞</span><p>Magic Mirror</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/emojis')"><span>🧋</span><p>Emojis World</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/textemoji')"><span>-`♡´-</span><p>Text Emoji</p></div>
+  <div class="card" onclick="goTo('https://zarnal.odoo.com/instaquotes')"><span>🍀</span><p>InstaQuotes</p></div>
+  <div class="card" onclick="goTo('https://in.pinterest.com/search/pins/?rs=typed&amp;q=Mehndi%20designs')"><span>🫳</span><p>Mehndi Designs</p></div>
+  <div class="card" onclick="goTo('https://in.pinterest.com/search/pins/?rs=typed&amp;q=Nailart')"><span>💅</span><p>Nail Art</p></div>
+
+  <div id="gif-box">
+    <img id="random-gif" alt="Random GIF" loading="lazy">
+  </div>
+</main>
+
+<script>
+// Redirect
+function goTo(url){ window.location.href = url; }
+
+// Ripple effect
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click', function(e){
+    const ripple = document.createElement('span');
+    ripple.classList.add('ripple');
+    this.appendChild(ripple);
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = e.clientX - rect.left - size/2 + 'px';
+    ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+    setTimeout(()=>{ ripple.remove(); },600);
+  });
+});
+
+// All Cloudinary GIF URLs
+const gifs = [
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623635/82fffadc3d49fb45dd2b7498a9a958c9_dadbhz.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623687/f9c66c239426463d9fab8e5eada9a435_h904zk.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623571/7c96bfd9a02b3ff088bbf3e9ca871bb1_csbepq.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623719/ef3b42ceb18014af07c46182bacf1f0b_hycr8i.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623546/0c2f133a35c11c13eb50b0ba9a5e282c_u54pun.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623580/d8cbb31231555eda7dff68848db4aee1_bpfiac.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623620/ddc013635f19439384eca06eb076e0e4_nu0bg6.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623643/05020404f5546f4c9373327e96ac9fcd_fig1za.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623724/758e2b37f4251d4443335b9e52a9a9a0_rtxqgm.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757623743/c6356d716748e7b195b1d622a5b4326d_doogtg.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759241/1c3e6cf5100fc66db16880281354fcdf_jcqirw.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759242/46eba785a74a5f6d59b31102ecd5f098_bw8mgt.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759244/d5d71b2b47998191bd31d361753d86ff_xyb6ns.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759245/cd733db29e4f0f9fd6e1cfd00a06453c_yyqhko.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759248/b94e18ea40626f10bc67eaba042ec415_uamxhv.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759249/59ea71439cceecc40f102c83fadbbb40_yzm8pv.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759249/59a7278c2684cb7be25f423014d237a5_b9ggl4.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759250/ec3373cf7b02071135fbf328f526eeb0_queey2.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759252/224a9d39157211a36e3e1d43cc0fccf4_il73la.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759254/c3b1caab4ca684a0f2387681bcb4b274_zjzwu0.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759255/9172ec7a719b7b54b83b84604979286e_zyx5ns.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757759255/14ca7a66a6c8d11abc09d488bcac2683_euus1p.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761460/182bc6a747a4441eb1af0cf7e0d0cddc_hknrff.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761461/2e93119a6f4a138992c8021f91b51f74_cka2v7.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761461/02136d0bec30467abaa0d11c419698b4_vbedni.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761462/7d07a255678962d30d8717dcf5dbd266_ass51g.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761463/c3274236e4e16329c247da3a95871ad4_qicobq.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757766013/07277e3ac89f3b5ecb02530bb350f255_qfji78.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757766014/2d6b02fffaddc99f27fb267015997cce_jete14.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761465/443ca36f3fe93d7f050029bf63039eb0_ltx3eq.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761465/74ca7a451c3eea33f7e09622c439404f_mluifn.gif",
+"https://res.cloudinary.com/dspclllob/image/upload/v1757761466/e8ac0e05e8a106d16e54d843b7d24aed_bgupnq.gif"
+];
+
+// Random GIF display
+function showRandomGif() {
+  const img = document.getElementById('random-gif');
+  const index = Math.floor(Math.random() * gifs.length);
+  img.src = gifs[index];
+}
+
+// DOM loaded
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.getElementById('loader').style.display='none';
+  showRandomGif();
+});
+</script>
