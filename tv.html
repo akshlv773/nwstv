@@ -8,66 +8,57 @@
 <style>
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:#f5f5f7}
-main{max-width:920px;margin:0 auto;padding:12px}
-.video{overflow:hidden;border-radius:13px;background:#000;margin:0 0 12px}
-.player{width:100%;height:0;padding-bottom:56.25%;position:relative;background:#000}
-.player iframe,.thumb{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
-.thumb{object-fit:cover;cursor:pointer}
-@media(min-width:680px){main{padding:20px}.video{display:inline-block;vertical-align:top;width:49%;margin-right:1.5%}.video:nth-child(2){margin-right:0}}
+body{margin:0;background:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+main{width:100%;max-width:1000px;margin:0 auto;padding:12px}
+.video-card{width:100%;overflow:hidden;background:#fff;border:1px solid #e4e4e7;border-radius:15px;margin:0 0 14px;box-shadow:0 3px 14px rgba(0,0,0,.055)}
+.player-wrap{position:relative;width:100%;height:0;padding-bottom:56.25%;background:#000}
+.player-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
+@media(min-width:720px){
+ main{padding:20px}
+ .video-card{display:inline-block;vertical-align:top;width:49%;margin-right:1.5%;margin-bottom:18px}
+ .video-card:nth-child(2){margin-right:0}
+}
 </style>
 </head>
 <body>
 <main>
-<div class="video">
-<div class="player" data-video="psIZiXQvGfo">
-<a href="https://www.youtube.com/watch?v=psIZiXQvGfo" target="_blank" rel="noopener">
-<img class="thumb" src="https://i.ytimg.com/vi/psIZiXQvGfo/hqdefault.jpg" alt="">
-</a>
-</div>
-</div>
-<div class="video">
-<div class="player" data-video="BCulM89gpB8">
-<a href="https://www.youtube.com/watch?v=BCulM89gpB8" target="_blank" rel="noopener">
-<img class="thumb" src="https://i.ytimg.com/vi/BCulM89gpB8/hqdefault.jpg" alt="">
-</a>
-</div>
-</div>
+<div class="video-card"><div class="player-wrap"><div id="player1"></div></div></div>
+<div class="video-card"><div class="player-wrap"><div id="player2"></div></div></div>
 </main>
 <script>
 (function(){
-  var players=document.getElementsByClassName('player');
-  function playVideo(box){
-    var id=box.getAttribute('data-video');
-    if(!id||box.getElementsByTagName('iframe').length){return;}
-    var iframe=document.createElement('iframe');
-    iframe.setAttribute('src','https://www.youtube.com/embed/'+id+'?autoplay=1&playsinline=1&rel=0');
-    iframe.setAttribute('title','Video');
-    iframe.setAttribute('allow','autoplay; encrypted-media; picture-in-picture');
-    iframe.setAttribute('allowfullscreen','allowfullscreen');
-    iframe.setAttribute('frameborder','0');
-    iframe.style.position='absolute';
-    iframe.style.top='0';
-    iframe.style.left='0';
-    iframe.style.width='100%';
-    iframe.style.height='100%';
-    iframe.style.border='0';
-    box.innerHTML='';
-    box.appendChild(iframe);
+  var ids=['psIZiXQvGfo','BCulM89gpB8'];
+  var players=[];
+  var apiReady=false;
+  function createPlayers(){
+    if(!apiReady||!window.YT||!YT.Player){return;}
+    var i;
+    for(i=0;i<ids.length;i++){
+      if(players[i]){continue;}
+      players[i]=new YT.Player('player'+(i+1),{
+        videoId:ids[i],
+        playerVars:{playsinline:1,rel:0,modestbranding:1},
+        events:{
+          onStateChange:(function(index){
+            return function(event){
+              if(event.data===YT.PlayerState.PLAYING){
+                var j;
+                for(j=0;j<players.length;j++){
+                  if(j!==index&&players[j]&&players[j].pauseVideo){players[j].pauseVideo();}
+                }
+              }
+            };
+          })(i)
+        }
+      });
+    }
   }
-  var i;
-  for(i=0;i<players.length;i++){
-    (function(box){
-      var link=box.getElementsByTagName('a')[0];
-      if(link){
-        link.onclick=function(e){
-          if(e&&e.preventDefault){e.preventDefault();}
-          playVideo(box);
-          return false;
-        };
-      }
-    })(players[i]);
-  }
+  window.onYouTubeIframeAPIReady=function(){apiReady=true;createPlayers();};
+  var script=document.createElement('script');
+  script.src='https://www.youtube.com/iframe_api';
+  script.async=true;
+  var first=document.getElementsByTagName('script')[0];
+  first.parentNode.insertBefore(script,first);
 })();
 </script>
 </body>
